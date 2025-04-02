@@ -5,7 +5,7 @@ import plotly.express as px
 df = pd.read_csv('data/vg_sales.csv')
 df = df.drop(['img'], axis = 1)
 df['release_date'] = pd.to_datetime(df['release_date'])
-
+df['total_sales'].dropna()
 def set_time_interval(initial, final):
     time_filter = (df['release_date'].dt.year >= initial) & (df['release_date'].dt.year <= final)
     return df[time_filter]
@@ -17,6 +17,7 @@ st.set_page_config(
     layout = "wide"
 )
 st.sidebar.header('Filtros')
+st.title('Game Intel')
 
 st.sidebar.multiselect(
     label = "Genre",
@@ -35,7 +36,9 @@ if st.sidebar.checkbox('Time Interval'):
         max_value = df['release_date'].max().year,
         value = (1980, 2020)
     )
-    filtered_df = set_time_interval(years[0], years[1])
+    df = set_time_interval(years[0], years[1])
+    fig = px.bar(df, x=df['release_date'].dt.year, y='total_sales')
+    st.plotly_chart(fig)
 else:
     year = st.sidebar.slider(
         label = "Year",
@@ -43,8 +46,7 @@ else:
         max_value=df['release_date'].max().year,
         value=(1980)
     )
-    filtered_df = set_time_interval(year, year)
+    df = set_time_interval(year, year)
+    fig = px.pie(df, names = 'console',values='total_sales')
+    st.plotly_chart(fig)
 
-st.dataframe(filtered_df)
-
-st.title('Game Intel')
