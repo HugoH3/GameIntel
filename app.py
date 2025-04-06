@@ -47,14 +47,10 @@ region = st.sidebar.selectbox(
     options=['JP', 'NA', 'PAL'],
     placeholder="Filter region"
 )
-set_region(region)
 # Pega a regiao escolhida e atribui as vendas dela ao 'total_value' para criar as metricas filtradas
-if region == 'JP':
-    df['total_sales'] = df['jp_sales']
-elif region == 'NA':
-    df['total_sales'] = df['na_sales']
-elif region == 'PAL':
-    df['total_sales'] = df['pal_sales']
+set_region(region)
+
+
 df = set_publisher(publisher)
 if publisher is not None:
     st.subheader(f"Showing data for: {publisher}")
