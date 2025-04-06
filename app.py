@@ -32,7 +32,7 @@ st.set_page_config(
     page_icon="🎮",
     layout="wide"
 )
-st.sidebar.header('Filtros')
+st.sidebar.header('Filters')
 st.title('Game Intel')
 
 publisher = st.sidebar.selectbox(
