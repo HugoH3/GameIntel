@@ -76,7 +76,7 @@ else:
     bar = px.bar(df, x='release_date', y='total_sales')
 
 
-sales_per_year = df.groupby('year')['total_sales'].mean().reset_index()
+sales_per_year = df.groupby('year')['total_sales'].sum().reset_index()
 bar = px.bar(df, x='console', y='total_sales', color='console')
 pie = px.pie(df, values='total_sales', names='genre')
 line = px.line(sales_per_year, x='year', y='total_sales')
