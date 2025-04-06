@@ -18,9 +18,12 @@ def set_publisher(publisher):
     return df[publisher_filter]
 
 def set_region(region):
-    if region is None:
-        return df
-    region_filter = (df['region'] == region)
+    if region == 'JP':
+        df['total_sales'] = df['jp_sales']
+    elif region == 'NA':
+        df['total_sales'] = df['na_sales']
+    elif region == 'PAL':
+        df['total_sales'] = df['pal_sales']
 
 #! Layout do Dashboard
 
@@ -44,13 +47,13 @@ region = st.sidebar.selectbox(
     options=['JP', 'NA', 'PAL'],
     placeholder="Filter region"
 )
-
+set_region(region)
 # Pega a regiao escolhida e atribui as vendas dela ao 'total_value' para criar as metricas filtradas
-if region is 'JP':
+if region == 'JP':
     df['total_sales'] = df['jp_sales']
-elif region is 'NA':
+elif region == 'NA':
     df['total_sales'] = df['na_sales']
-elif region is 'PAL':
+elif region == 'PAL':
     df['total_sales'] = df['pal_sales']
 df = set_publisher(publisher)
 if publisher is not None:
