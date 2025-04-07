@@ -43,7 +43,6 @@ O arquivo CSV contém as seguintes colunas:
   - Barras: Vendas por console, jogos vendidos e top 10 best-sellers do ano
   - Pizza: Vendas por gênero
   - Linha: Receita ao longo dos anos
-  - Top 10 Melhores Vendas do Ano
 - **Métricas**: Receita total acumulada.
 
 ## 🚀 Como Executar
