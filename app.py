@@ -25,6 +25,7 @@ def set_region(region):
     elif region == 'PAL':
         df['total_sales'] = df['pal_sales']
 
+
 #! Layout do Dashboard
 
 st.set_page_config(
@@ -33,7 +34,7 @@ st.set_page_config(
     layout="wide"
 )
 st.sidebar.header('Filters')
-st.title('Game Intel')
+st.title('GameIntel: VG Sales Dashboard')
 
 publisher = st.sidebar.selectbox(
     label="Publisher",
@@ -49,7 +50,8 @@ region = st.sidebar.selectbox(
 )
 # Pega a regiao escolhida e atribui as vendas dela ao 'total_value' para criar as metricas filtradas
 set_region(region)
-
+ #! Remove jogos não lançados na região
+df = df.dropna(subset=['total_sales'])
 
 df = set_publisher(publisher)
 if publisher is not None:
@@ -81,7 +83,7 @@ bar = px.bar(df, x='console', y='total_sales', color='console')
 pie = px.pie(df, values='total_sales', names='genre')
 line = px.line(sales_per_year, x='year', y='total_sales')
 c1 = st.container(border=True)
-col1, col2 = st.columns(2)
+col1, col2 = st.columns(2, border=True)
 
 with c1:
     if checkbox:
